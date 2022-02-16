@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <div>
+            <h2>List City</h2>
+        </div>
+        <div style="float: right">
+            <button type="button" class="btn btn-success"><a href="/create">Add New City</a></button>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered">
+        <thead>
+        <tr style="background-color: lightblue">
+            <th>#</th>
+            <th>Name City</th>
+            <th>Nation</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="o,loop :${listCity}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${o.nameCity}"></td>
+            <td th:text="${o.nation.nameNation}"></td>
+            <td>
+                <a th:href="@{/edit/{id}(id=${o.id})}" class="btn btn-warning">Update</a>
+                <a th:href="@{/delete/{id}(id=${o.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div style="padding-left: 45%">
+    <button th:if="${listCity.hasPrevious()}"><a th:href="@{/showcity(page=${listCity.number}-1)}"><<<</a></button>
+    <b th:text="${listCity.number}+1"></b> / <b th:text="${listCity.totalPages}"></b>
+    <button th:if="${listCity.hasNext()}"><a th:href="@{/showcity(page=${listCity.number}+1)}">>>></a></button>
+</div>
+</body>
+</html>

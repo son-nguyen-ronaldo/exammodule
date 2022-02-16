@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Add New City</h2>
+    <form th:object="${createCity}" th:action="@{/create}" method="post">
+        <table class="table table-bordered">
+            <tr>
+                <th>Name City</th>
+                <td><input th:field="*{nameCity}"></td>
+                <td style="color: red" th:if="${#fields.hasErrors('nameCity')}" th:errors="*{nameCity}"></td>
+            </tr>
+            <tr>
+                <th>Nation</th>
+                <td>
+                    <select th:field ="*{nation}">
+                        <option th:each="o :${createNation}" th:text="${o.nameNation}" th:value="${o.idNation}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Area</th>
+                <td><input th:field="*{area}"></td>
+                <td style="color: red" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></td>
+            </tr>
+            <tr>
+                <th>Population</th>
+                <td><input th:field="*{population}"></td>
+                <td style="color: red" th:if="${#fields.hasErrors('population')}" th:errors="*{population}"></td>
+            </tr>
+            <tr>
+                <th>GDP</th>
+                <td><input th:field="*{gdp}"></td>
+                <td style="color: red" th:if="${#fields.hasErrors('gdp')}" th:errors="*{gdp}"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td><input th:field="*{description}"></td>
+                <td style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+            </tr>
+
+        </table>
+        <button type="submit" class="btn btn-success">ADD New City</button>
+        <button type="button" class="btn"><a href="/showcity">Back</a></button>
+    </form>
+</div>
+</body>
+</html>
